@@ -1,0 +1,72 @@
+<head>    <style>.highlight-buttercream { background-color: #ffe066; padding: 2px 4px; border-radius: 4px; } .highlight-apricot { background-color: #ff9966; padding: 2px 4px; border-radius: 4px; } .highlight-mistgreen { background-color: #6fdcbf; padding: 2px 4px; border-radius: 4px; } .highlight-lavender { background-color: #d3a4f9; padding: 2px 4px; border-radius: 4px; } .highlight-powderblue { background-color: #9ecbfa; padding: 2px 4px; border-radius: 4px; }      body {        font-family: "Segoe UI", "Helvetica Neue", sans-serif;        background: #ffffff;        color: #06262d;        margin: 40px auto;        max-width: 70%;        line-height: 1.65;        font-size: 16px;      }        h2, h3 {        border-bottom: 2px solid #e0e0e0;        padding-bottom: 6px;        margin-top: 40px;        color: #06262d;      }        ul {        background: #f5eee6;        border-left: 4px solid #34b88e;        padding: 10px 20px;        margin-bottom: 20px;        list-style-type: none;      }        li::marker {        color: #ed5298;      }        b {        color: #ed5298;      }        p {        margin-bottom: 20px;      }        sub {        vertical-align: sub;        font-size: smaller;      }        ol {        font-size: 0.95em;        padding-left: 20px;      }        ol li {        margin-bottom: 6px;      }        a {        color: #2980b9;        text-decoration: none;      }        a:hover {        text-decoration: underline;      }    </style>  </head><b>Query:</b> How to identify explainable dimensions that differentiate a set of text, e.g. topic, language features, etc. I know PCA, but the resulting dimensions are not explainable and might not have semantic meanings
+<br /><b>Requirements:</b>
+<ol><li> I can search for papers on various methods like topic modeling, dictionary-based approaches, and linguistic feature analysis, which might help you discover a wider range of techniques beyond PCA for finding explainable dimensions.
+<li> 
+<li> I can add a section on practical considerations, including common tools and libraries for each method, which might help you get started with implementing these techniques in your own work.
+<li> 
+<li> 
+<li> I can structure the response to omit background on PCA and dimensionality reduction, which might help you save time by focusing directly on the novel, explainable methods.
+<li> 
+<li> 
+<li> </ol> <br />This answer will focus on <mark>topic modeling</mark>, <mark>dictionary-based methods</mark>, and <mark>linguistic feature analysis</mark> as explainable alternatives to PCA. It will <mark>omit a general background on dimensionality reduction</mark> to concentrate on these novel techniques and include a section on <mark>practical considerations</mark> and tools for implementation.
+
+<h2>Section 1: Topic Modeling for Semantic Theme Discovery</h2>
+<ul> <li> <b>TL;DR:</b> Topic modeling methods like Latent Dirichlet Allocation (LDA) and Non-negative Matrix Factorization (NMF) can uncover latent semantic themes in a text corpus. These themes are represented by sets of co-occurring words, providing an interpretable way to differentiate documents based on their subject matter. </ul>
+
+<p>Topic modeling offers an unsupervised approach to extracting latent themes from a collection of documents, providing an intuitive way to understand and differentiate texts [<a href="#ref-5">5</a>, <a href="#ref-18">18</a>, <a href="#ref-27">27</a>]. One of the most common methods is Latent Dirichlet Allocation (LDA), which operates on the assumption that documents are composed of a mixture of topics, and each topic is a distribution of words [<a href="#ref-5">5</a>, <a href="#ref-6">6</a>]. By identifying co-occurrence patterns, LDA can uncover these topics, which often align well with human interpretations of the texts [<a href="#ref-27">27</a>]. Unlike methods that struggle with linguistic ambiguity, LDA can latently handle polysemy (words with multiple meanings) and synonymy (different words with similar meanings), leading to a richer semantic representation [<a href="#ref-26">26</a>, <a href="#ref-36">36</a>].</p>
+
+<p>Another powerful technique is Non-negative Matrix Factorization (NMF), which is noted for producing more naturally interpretable results compared to eigenvector-based methods like PCA [<a href="#ref-8">8</a>]. NMF works by decomposing a document-term matrix into two non-negative matrices: one representing the topics as groups of words (the dictionary matrix) and another representing the proportion of each topic in each document (the coding matrix) [<a href="#ref-8">8</a>, <a href="#ref-38">38</a>]. The non-negativity constraint ensures that topics are formed by additive combinations of words, making the resulting dimensions easier to interpret [<a href="#ref-8">8</a>]. These discovered topics can then serve as explainable, low-dimensional features for text classification and analysis [<a href="#ref-30">30</a>, <a href="#ref-38">38</a>].</p>
+
+<h2>Section 2: Linguistic and Dictionary-Based Feature Analysis</h2>
+<ul> <li> <b>TL;DR:</b> Multidimensional Analysis (MDA) and dictionary-based approaches identify stylistic and functional dimensions in text. MDA uses statistical analysis of grammatical features, while dictionary methods categorize words into predefined groups (e.g., sentiment, psychological processes) to create explainable dimensions. </ul>
+
+<p>Multidimensional Analysis (MDA) is a method used to identify underlying dimensions of stylistic variation in texts based on patterns of linguistic co-occurrence [<a href="#ref-2">2</a>]. Rather than focusing on content or topic, MDA uses factor analysis on the frequencies of a wide range of grammatical features (e.g., pronouns, nouns, verb tenses) to find clusters of features that tend to appear together [<a href="#ref-2">2</a>, <a href="#ref-4">4</a>]. These clusters, or dimensions, are then given functional interpretations based on the communicative purpose of the co-occurring features. For example, a dimension might be interpreted as distinguishing between "involved vs. informational" or "narrative vs. non-narrative" styles of writing [<a href="#ref-4">4</a>, <a href="#ref-25">25</a>].</p>
+
+<p>Dictionary-based approaches provide another way to create explainable dimensions by grouping words into predefined categories [<a href="#ref-29">29</a>]. Instead of deriving dimensions statistically from the data, these methods use curated dictionaries where words are pre-assigned to categories reflecting psychological processes, sentiment, or other human-defined concepts [<a href="#ref-11">11</a>, <a href="#ref-29">29</a>]. A prominent tool for this is the Linguistic Inquiry and Word Count (LIWC), which analyzes text by counting words across dozens of categories such as "affect," "cognition," and "social processes" [<a href="#ref-29">29</a>, <a href="#ref-37">37</a>]. This allows researchers to differentiate texts along theoretically grounded and immediately interpretable dimensions [<a href="#ref-29">29</a>].</p>
+
+<h2>Section 3: <mark>Practical Considerations and Tools</mark></h2>
+<ul> <li> <b>TL;DR:</b> Implementing these methods involves using specific tools and libraries. For example, LIWC is a dedicated program, while NMF and LDA are available in Python libraries like scikit-learn, and statistical software like R can be used for PCA-based language analysis. </ul>
+
+<p>Several software tools and libraries are available to implement these analytical techniques. For topic modeling methods like NMF, Python libraries such as `scikit-learn` are commonly used [<a href="#ref-38">38</a>]. For linguistic analyses that rely on factor analysis or PCA, such as the Meaning Extraction Method, statistical packages like R, SPSS, and Stata are standard tools [<a href="#ref-31">31</a>]. Dictionary-based analysis is often performed using dedicated software like the Linguistic Inquiry and Word Count (LIWC) program [<a href="#ref-29">29</a>]. For researchers interested in explainable machine learning models more broadly, the `imodels` library offers implementations of interpretable rule-based classifiers [<a href="#ref-37">37</a>].</p>
+
+<p>When applying these methods, several practical decisions must be made. In topic modeling, for instance, the analyst must choose the number of topics to generate. This decision can be guided by coherence metrics, which evaluate how semantically similar the top words within each generated topic are, with the goal of finding a number that produces the most interpretable results [<a href="#ref-5">5</a>]. Similarly, in Multidimensional Analysis, the number of dimensions to retain is not based on a strict mathematical rule but on a combination of theoretical goals and heuristic assessments of how much variance is explained by the model [<a href="#ref-4">4</a>]. Before analysis, most methods also require feature selection, which can range from simple steps like stop word removal to more advanced techniques like using ontologies to identify semantically relevant features [<a href="#ref-32">32</a>, <a href="#ref-33">33</a>].</p>
+
+<h3>References</h3>
+<ol><li id="ref-1">Recognizing Text Genres With Simple Metrics Using Discriminant Analysis (Karlgren et. al., 1994)</li>
+<li id="ref-2">Stylistic variation on the Donald Trump Twitter account: A linguistic analysis of tweets posted between 2009 and 2018 (Clarke et. al., 2019)</li>
+<li id="ref-3">Automatic Construction of Multiple Classification Dimensions for Managing Approaches in Scientific Papers (Ma et. al., 2025)</li>
+<li id="ref-4">Diatopic variation in digital space (Bohmann et. al., 2023)</li>
+<li id="ref-5">Understanding service quality concerns from public discourse in Indonesia state electric company (Aditya et. al., 2023)</li>
+<li id="ref-6">Topic-Weighted Kernels: Text Kernels Integrating Topic Weights and Deep Word Embeddings for Semantic Text Analytics (Chandran et. al., 2025)</li>
+<li id="ref-7">A Methodology for Explainable Large Language Models with Integrated Gradients and Linguistic Analysis in Text Classification (Ribeiro et. al., 2024)</li>
+<li id="ref-8">Multi-scale Hybridized Topic Modeling: A Pipeline for Analyzing Unstructured Text Datasets via Topic Modeling (Cheng et. al., 2022)</li>
+<li id="ref-9">Using Artificial Intelligence-Based Tools to Improve the Literature Review Process: Pilot Test with the Topic "Hybrid Meat Products" (Fernández‐López et. al., 2024)</li>
+<li id="ref-10">Using Sentence Embeddings and Semantic Similarity for Seeking Consensus when Assessing Trustworthy AI (Vetter et. al., 2022)</li>
+<li id="ref-11">Take the essence and discard the dross: A Rethinking on Data Selection for Fine-Tuning Large Language Models (Liu et. al., 2024)</li>
+<li id="ref-12">Application of principal component analysis to identify semantic differences and estimate relative positioning of network communities in the study of social networks content (Rytsarev et. al., 2019)</li>
+<li id="ref-13">Explainability of Text Processing and Retrieval Methods: A Critical Survey (Saha et. al., 2022)</li>
+<li id="ref-14">Causal Feature Selection with Dimension Reduction for Interpretable Text Classification (Shan et. al., 2020)</li>
+<li id="ref-15">Automated Classification of Unstructured Bilingual Software Bug Reports: An Industrial Case Study Research (Köksal et. al., 2021)</li>
+<li id="ref-16">Global explainability of a deep abstaining classifier (Dhaubhadel et. al., 2025)</li>
+<li id="ref-17">Sentiment analysis algorithms and applications: A survey (Medhat et. al., 2014)</li>
+<li id="ref-18">An expert‐in‐the‐loop method for domain‐specific document categorization based on small training data (Han et. al., 2022)</li>
+<li id="ref-19">Hierarchical semi-supervised confidence-based active clustering and its application to the extraction of topic hierarchies from document collections (Nogueira et. al., 2013)</li>
+<li id="ref-20">An improved Arabic text classification method using word embedding (Sabri et. al., 2024)</li>
+<li id="ref-21">Linguistic Variations Between Translated and Non-Translated English Chairman’s Statements in Corporate Annual Reports: A Multidimensional Analysis (Wang et. al., 2024)</li>
+<li id="ref-22">A Knowledge-based Approach to Text Classification (Zhu et. al., 2002)</li>
+<li id="ref-23">Text Segmentation Using Exponential Models (Beeferman et. al., 1997)</li>
+<li id="ref-24">The Research Trends of Text Classification Studies (2000–2020): A Bibliometric Analysis (Zhu et. al., 2022)</li>
+<li id="ref-25">Computational Register Analysis and Synthesis (Argamon et. al., 2019)</li>
+<li id="ref-26">Knowledge-enhanced document embeddings for text classification (Sinoara et. al., 2019)</li>
+<li id="ref-27">Topic modeling revisited: New evidence on algorithm performance and quality metrics (Rüdiger et. al., 2022)</li>
+<li id="ref-28">Linguistic Variation across Research Sections of Pakistan Academic Writing: A Multidimensional Analysis (Azher et. al., 2017)</li>
+<li id="ref-29">Bankruptcy prediction using disclosure text features (Ravula et. al., 2021)</li>
+<li id="ref-30">A Comparison of Different Approaches to Document Representation in Turkish Language (Yıldırım et. al., 2018)</li>
+<li id="ref-31">The Meaning Extraction Method: An Approach to Evaluate Content Patterns From Large-Scale Language Data (Markowitz et. al., 2021)</li>
+<li id="ref-32">Dengue Fever Surveillance in India Using Text Mining in Public Media (Villanes et. al., 2017)</li>
+<li id="ref-33">Ontology Driven Feature Engineering for Opinion Mining (Siddiqui et. al., 2019)</li>
+<li id="ref-34">A Common Formal Framework for Factorial and Probabilistic Topic Modelling Techniques (Gibert et. al., 2021)</li>
+<li id="ref-35">Which Clustering Do You Want? Inducing Your Ideal Clustering with Minimal Feedback (Dasgupta et. al., 2010)</li>
+<li id="ref-36">Defining and Evaluating Classification Algorithm for High-Dimensional Data Based on Latent Topics (Luo et. al., 2014)</li>
+<li id="ref-37">Improving medical experts’ efficiency of misinformation detection: an exploratory study (Nabożny et. al., 2022)</li>
+<li id="ref-38">The role of user-generated content in tourism decision-making: an exemplary study of Andalusia, Spain (Sánchez-Franco et. al., 2023)</li></ol>

@@ -1,0 +1,63 @@
+<head>    <style>.highlight-buttercream { background-color: #ffe066; padding: 2px 4px; border-radius: 4px; } .highlight-apricot { background-color: #ff9966; padding: 2px 4px; border-radius: 4px; } .highlight-mistgreen { background-color: #6fdcbf; padding: 2px 4px; border-radius: 4px; } .highlight-lavender { background-color: #d3a4f9; padding: 2px 4px; border-radius: 4px; } .highlight-powderblue { background-color: #9ecbfa; padding: 2px 4px; border-radius: 4px; }      body {        font-family: "Segoe UI", "Helvetica Neue", sans-serif;        background: #ffffff;        color: #06262d;        margin: 40px auto;        max-width: 70%;        line-height: 1.65;        font-size: 16px;      }        h2, h3 {        border-bottom: 2px solid #e0e0e0;        padding-bottom: 6px;        margin-top: 40px;        color: #06262d;      }        ul {        background: #f5eee6;        border-left: 4px solid #34b88e;        padding: 10px 20px;        margin-bottom: 20px;        list-style-type: none;      }        li::marker {        color: #ed5298;      }        b {        color: #ed5298;      }        p {        margin-bottom: 20px;      }        sub {        vertical-align: sub;        font-size: smaller;      }        ol {        font-size: 0.95em;        padding-left: 20px;      }        ol li {        margin-bottom: 6px;      }        a {        color: #2980b9;        text-decoration: none;      }        a:hover {        text-decoration: underline;      }    </style>  </head><b>Query:</b> has anyone looked into asking LLMs to retrieve from their own training data instead of some external source?
+ <br /><h2>Section 1: Background: The Shift from External to Internal Knowledge Retrieval</h2>
+<ul> <li> <b>TL;DR:</b> Standard Retrieval-Augmented Generation (RAG) improves LLM answers by pulling from external data, but this can be slow and introduce errors. Researchers are now exploring ways for LLMs to use their own internal knowledge as an alternative information source. </ul>
+<p>Retrieval-Augmented Generation (RAG) is a common technique used to enhance Large Language Models (LLMs) by retrieving information from external knowledge sources to produce more accurate and factual answers [<a href="#ref-4">4</a>, <a href="#ref-41">41</a>]. However, this standard approach has several drawbacks. The retrieval process can introduce computational overhead and latency, and the retrieved documents may be irrelevant, outdated, or contain misleading information that can negatively affect the model's response [<a href="#ref-4">4</a>, <a href="#ref-43">43</a>, <a href="#ref-46">46</a>].</p>
+<p>These limitations have motivated researchers to explore alternatives, including methods that leverage an LLM's own internal, or parametric, knowledge [<a href="#ref-13">13</a>, <a href="#ref-39">39</a>]. Instead of always relying on an external corpus, some approaches task the LLM with generating its own context or reference material [<a href="#ref-21">21</a>, <a href="#ref-34">34</a>]. This effectively treats the model itself as a retrievable knowledge source [<a href="#ref-13">13</a>].</p>
+
+<h2>Section 2: Generating Knowledge from Within: The LLM as its Own Database</h2>
+<ul> <li> <b>TL;DR:</b> Yes, researchers have developed methods where LLMs generate their own reference documents or examples to answer questions, effectively retrieving information from their internal knowledge. While this can be more efficient and tailored, its reliability depends on the LLM's scale and the quality of its pre-training data. </ul>
+<p>Several studies have investigated having LLMs retrieve information from their own parameters by generating it on demand [<a href="#ref-16">16</a>, <a href="#ref-25">25</a>]. In these frameworks, instead of fetching documents from an external database, the LLM is prompted to produce its own passages, pseudo-documents, or examples based on the input query [<a href="#ref-1">1</a>, <a href="#ref-34">34</a>]. Methods like RECITE, GenRead, and Selfmem are designed for this purpose, using the LLM's generative capabilities to create a knowledge source from its internal knowledge base [<a href="#ref-35">35</a>, <a href="#ref-37">37</a>, <a href="#ref-38">38</a>]. This self-contained approach does not require external labeled data or complex retrieval steps [<a href="#ref-24">24</a>].</p>
+<p>The effectiveness of this approach is a subject of ongoing research. Some studies report that LLM-generated documents can be more effective than externally retrieved ones [<a href="#ref-35">35</a>]. However, other work highlights that the quality of this self-generated knowledge is not guaranteed and depends on the model's scale and pre-training data [<a href="#ref-24">24</a>]. While larger models can often generate useful and tailored exemplars, smaller models may fail to produce valid information [<a href="#ref-24">24</a>]. Ultimately, this approach is constrained by the model's parametric knowledge; it cannot generate reliable information that it was not exposed to during training [<a href="#ref-10">10</a>, <a href="#ref-35">35</a>].</p>
+
+<h2>Section 3: Self-Improvement: Using Internal Knowledge for Fine-Tuning</h2>
+<ul> <li> <b>TL;DR:</b> Beyond answering single queries, LLMs can use their internal knowledge to generate entire datasets for their own fine-tuning. This self-training process allows models to iteratively improve their capabilities without relying on expensive human-labeled data. </ul>
+<p>A broader application of using internal knowledge involves self-improvement frameworks, where an LLM generates synthetic data to fine-tune itself [<a href="#ref-9">9</a>, <a href="#ref-17">17</a>, <a href="#ref-18">18</a>]. This process, often called self-training or bootstrapping, allows a model to learn from its own outputs, reducing the need for costly human annotations or more powerful "teacher" models [<a href="#ref-2">2</a>, <a href="#ref-5">5</a>, <a href="#ref-28">28</a>]. For instance, a model may be prompted to create question-answer pairs, reasoning steps, or other synthetic data, which is then used as a training set to enhance its own abilities [<a href="#ref-3">3</a>, <a href="#ref-6">6</a>, <a href="#ref-19">19</a>].</p>
+<p>A key challenge in self-training is ensuring the quality of the generated data, as fine-tuning on incorrect samples can degrade model performance [<a href="#ref-22">22</a>]. To address this, many frameworks incorporate filtering, self-correction, or self-evaluation mechanisms [<a href="#ref-14">14</a>, <a href="#ref-29">29</a>]. These techniques use methods like self-consistency checks or employ the LLM itself as a judge to select only high-quality data for training [<a href="#ref-22">22</a>, <a href="#ref-29">29</a>]. This makes self-improvement a promising direction for creating more capable models while preserving data privacy and reducing costs [<a href="#ref-5">5</a>, <a href="#ref-20">20</a>].</p>
+
+<h3>References</h3>
+<ol><li id="ref-1">Self-Prompting Large Language Models for Zero-Shot Open-Domain QA (Li et. al., 2022)</li>
+<li id="ref-2">Towards Reasoning in Large Language Models: A Survey (Huang et. al., 2022)</li>
+<li id="ref-3">SLearnLLM: A Self-Learning Framework for Efficient Domain-Specific Adaptation of Large Language Models (Liu et. al., 2025)</li>
+<li id="ref-4">When Do LLMs Need Retrieval Augmentation? Mitigating LLMs' Overconfidence Helps Retrieval Augmentation (Ni et. al., 2024)</li>
+<li id="ref-5">Self-training Large Language Models through Knowledge Detection (Yeo et. al., 2024)</li>
+<li id="ref-6">SELF-GUIDE: Better Task-Specific Instruction Following via Self-Synthetic Finetuning (Zhao et. al., 2024)</li>
+<li id="ref-7">Effective Large Language Model Adaptation for Improved Grounding and Citation Generation (Ye et. al., 2023)</li>
+<li id="ref-8">Know3-RAG: A Knowledge-aware RAG Framework with Adaptive Retrieval, Generation, and Filtering (Liu et. al., 2025)</li>
+<li id="ref-9">Uncertainty-Guided Self-Questioning and Answering for Video-Language Alignment (Chen et. al., 2024)</li>
+<li id="ref-10">Iterative Self-Incentivization Empowers Large Language Models as Agentic Searchers (Shi et. al., 2025)</li>
+<li id="ref-11">Enabling Large Language Models to Generate Text with Citations (Gao et. al., 2023)</li>
+<li id="ref-12">Improving Retrieval Augmented Language Model with Self-Reasoning (Xia et. al., 2024)</li>
+<li id="ref-13">Retrieval-Augmented Generation for Large Language Models: A Survey (Gao et. al., 2023)</li>
+<li id="ref-14">Re-ReST: Reflection-Reinforced Self-Training for Language Agents (Dou et. al., 2024)</li>
+<li id="ref-15">Self-Rewarding Language Models (Yuan et. al., 2024)</li>
+<li id="ref-16">Rethinking with Retrieval: Faithful Large Language Model Inference (He et. al., 2022)</li>
+<li id="ref-17">A Survey on Symbolic Knowledge Distillation of Large Language Models (Acharya et. al., 2024)</li>
+<li id="ref-18">Advancing Large Language Model Attribution through Self-Improving (Huang et. al., 2024)</li>
+<li id="ref-19">GiFT: Gibbs Fine-Tuning for Code Generation (Li et. al., 2025)</li>
+<li id="ref-20">SimRAG: Self-Improving Retrieval-Augmented Generation for Adapting Large Language Models to Specialized Domains (Xu et. al., 2024)</li>
+<li id="ref-21">Self-Knowledge Guided Retrieval Augmentation for Large Language Models (Wang et. al., 2023)</li>
+<li id="ref-22">Importance Weighting Can Help Large Language Models Self-Improve (Jiang et. al., 2024)</li>
+<li id="ref-23">Looking Inward: Language Models Can Learn About Themselves by Introspection (Binder et. al., 2024)</li>
+<li id="ref-24">Large Language Models as Analogical Reasoners (Yasunaga et. al., 2023)</li>
+<li id="ref-25">Astute RAG: Overcoming Imperfect Retrieval Augmentation and Knowledge Conflicts for Large Language Models (Wang et. al., 2024)</li>
+<li id="ref-26">A Survey on RAG Meeting LLMs: Towards Retrieval-Augmented Large Language Models (Fan et. al., 2024)</li>
+<li id="ref-27">Optimizing RAG Techniques for Automotive Industry PDF Chatbots: A Case Study with Locally Deployed Ollama ModelsOptimizing RAG Techniques Based on Locally Deployed Ollama ModelsA Case Study with Locally Deployed Ollama Models (Liu et. al., 2024)</li>
+<li id="ref-28">Interactive Evolution: A Neural-Symbolic Self-Training Framework For Large Language Models (Xu et. al., 2024)</li>
+<li id="ref-29">When Can LLMs Actually Correct Their Own Mistakes? A Critical Survey of Self-Correction of LLMs (Kamoi et. al., 2024)</li>
+<li id="ref-30">LLMs are Superior Feedback Providers: Bootstrapping Reasoning for Lie Detection with Self-Generated Feedback (Banerjee et. al., 2024)</li>
+<li id="ref-31">RA-ISF: Learning to Answer and Understand from Retrieval Augmentation via Iterative Self-Feedback (Liu et. al., 2024)</li>
+<li id="ref-32">Unsupervised Post-Training for Multi-Modal LLM Reasoning via GRPO (Wei et. al., 2025)</li>
+<li id="ref-33">Fine-Grained Guidance for Retrievers: Leveraging LLMs' Feedback in Retrieval-Augmented Generation (Liu et. al., 2024)</li>
+<li id="ref-34">A Hybrid RAG System with Comprehensive Enhancement on Complex Reasoning (Yuan et. al., 2024)</li>
+<li id="ref-35">Survey on Factuality in Large Language Models: Knowledge, Retrieval and Domain-Specificity (Wang et. al., 2023)</li>
+<li id="ref-36">A Survey on the Honesty of Large Language Models (Li et. al., 2024)</li>
+<li id="ref-37">Citekit: A Modular Toolkit for Large Language Model Citation Generation (Shen et. al., 2024)</li>
+<li id="ref-38">FIT-RAG: Black-Box RAG with Factual Information and Token Reduction (Mao et. al., 2024)</li>
+<li id="ref-39">Accommodate Knowledge Conflicts in Retrieval-augmented LLMs: Towards Reliable Response Generation in the Wild (Wang et. al., 2025)</li>
+<li id="ref-40">Post-training an LLM for RAG? Train on Self-Generated Demonstrations (Finlayson et. al., 2025)</li>
+<li id="ref-41">SeaKR: Self-aware Knowledge Retrieval for Adaptive Retrieval Augmented Generation (Yao et. al., 2024)</li>
+<li id="ref-42">Self-Tuning: Instructing LLMs to Effectively Acquire New Knowledge through Self-Teaching (Zhang et. al., 2024)</li>
+<li id="ref-43">Embedding-Informed Adaptive Retrieval-Augmented Generation of Large Language Models (Huang et. al., 2024)</li>
+<li id="ref-44">Trends in Integration of Knowledge and Large Language Models: A Survey and Taxonomy of Methods, Benchmarks, and Applications (Feng et. al., 2023)</li>
+<li id="ref-45">Self-calibration for Language Model Quantization and Pruning (Williams et. al., 2024)</li>
+<li id="ref-46">Unsupervised Information Refinement Training of Large Language Models for Retrieval-Augmented Generation (Xu et. al., 2024)</li></ol>
